@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ffe4ef" />
+  <title>A Little Reminder for Gulaabiiii &amp; Kuchuu 💗</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+    :root {
+      --pink: #ff8fbd;
+      --deep: #e85b98;
+      --ink: #75465d;
+      --soft-ink: #a66d87;
+      --cream: #fffafc;
+      --line: rgba(222, 111, 159, .18);
+      --shadow: 0 22px 65px rgba(189, 91, 135, .15);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--ink);
+      font-family: 'Nunito', sans-serif;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(255,255,255,.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 85% 20%, rgba(255,255,255,.8) 0 3px, transparent 4px),
+        linear-gradient(145deg, #fff4f8 0%, #ffe2ed 48%, #fff0f5 100%);
+      background-size: 90px 90px, 120px 120px, auto;
+    }
+
+    button { font: inherit; }
+    .page {
+      position: relative;
+      width: min(100% - 32px, 760px);
+      margin: 0 auto;
+      padding: 28px 0 48px;
+      z-index: 1;
+    }
+
+    .topline {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      margin: 4px 0 20px;
+      color: #c47a9b;
+      font-size: .76rem;
+      font-weight: 900;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .topline span { color: #f18ab5; }
+
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: clamp(28px, 7vw, 58px) clamp(18px, 5vw, 48px) 42px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: 34px;
+      background: rgba(255,255,255,.73);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero::before, .hero::after {
+      content: "♡";
+      position: absolute;
+      color: rgba(244, 133, 177, .18);
+      font-family: Georgia, serif;
+      pointer-events: none;
+    }
+    .hero::before { font-size: 150px; left: -25px; top: -55px; transform: rotate(-18deg); }
+    .hero::after { content: "✿"; font-size: 110px; right: -18px; bottom: -42px; transform: rotate(18deg); }
+
+    .bow {
+      display: inline-block;
+      font-size: 2.7rem;
+      line-height: 1;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 5px 5px rgba(229, 91, 152, .16));
+      animation: bob 3s ease-in-out infinite;
+    }
+
+    h1 {
+      position: relative;
+      margin: 0;
+      color: #d95691;
+      font-size: clamp(2.25rem, 8vw, 4.5rem);
+      line-height: 1.03;
+      letter-spacing: -.055em;
+      font-weight: 900;
+    }
+    .names {
+      margin: 14px 0 0;
+      color: #b86e91;
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      font-weight: 800;
+    }
+    .intro {
+      max-width: 470px;
+      margin: 18px auto 0;
+      color: var(--soft-ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(.94rem, 2.7vw, 1.05rem);
+      line-height: 1.75;
+    }
+
+    .main-button, .secondary-button {
+      position: relative;
+      z-index: 1;
+      border: 0;
+      cursor: pointer;
+      border-radius: 999px;
+      font-weight: 900;
+      transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .main-button {
+      margin-top: 27px;
+      padding: 16px 27px;
+      color: white;
+      background: linear-gradient(135deg, #ff9bc3, #ec6ba4);
+      box-shadow: 0 10px 22px rgba(232, 91, 152, .25), inset 0 1px 0 rgba(255,255,255,.5);
+      font-size: 1rem;
+    }
+    .main-button:hover, .secondary-button:hover { transform: translateY(-3px); filter: saturate(1.08); }
+    .main-button:active, .secondary-button:active { transform: scale(.97); }
+
+    .tiny-note {
+      margin: 12px 0 0;
+      color: #c18aa3;
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .surprise {
+      display: none;
+      margin-top: 22px;
+      padding: clamp(24px, 6vw, 38px);
+      border: 1px solid rgba(255,255,255,.95);
+      border-radius: 30px;
+      background: rgba(255,255,255,.8);
+      box-shadow: var(--shadow);
+      text-align: center;
+      animation: rise .65s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .surprise.show { display: block; }
+    .message-count {
+      display: inline-block;
+      padding: 7px 13px;
+      border-radius: 999px;
+      color: #c16f94;
+      background: #fff0f6;
+      font-size: .75rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .message-heart {
+      margin: 15px 0 7px;
+      font-size: 2.3rem;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+    .message {
+      min-height: 90px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto;
+      max-width: 560px;
+      color: #9c5276;
+      font-size: clamp(1.28rem, 4.4vw, 2rem);
+      font-weight: 900;
+      line-height: 1.35;
+      letter-spacing: -.025em;
+    }
+    .message-sub {
+      min-height: 25px;
+      margin: 13px 0 22px;
+      color: #bd83a0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9rem;
+      line-height: 1.6;
+    }
+    .secondary-button {
+      padding: 13px 20px;
+      color: #d65391;
+      background: #ffe8f1;
+      box-shadow: inset 0 0 0 1px #ffd0e2;
+      font-size: .92rem;
+    }
+    .secondary-button + .secondary-button { margin-left: 8px; }
+
+    .little-letter {
+      margin-top: 22px;
+      padding: clamp(25px, 6vw, 40px);
+      border: 1px solid rgba(255,255,255,.95);
+      border-radius: 30px;
+      background: rgba(255,255,255,.72);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .section-kicker {
+      margin: 0 0 10px;
+      color: #d47b9f;
+      font-size: .73rem;
+      font-weight: 900;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    h2 {
+      margin: 0;
+      color: #d65d95;
+      font-size: clamp(1.6rem, 5vw, 2.35rem);
+      font-weight: 900;
+      letter-spacing: -.04em;
+    }
+    .letter-copy {
+      max-width: 540px;
+      margin: 18px auto 0;
+      color: #93627a;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .98rem;
+      line-height: 1.9;
+    }
+    .signature {
+      margin: 20px 0 0;
+      color: #d65d95;
+      font-size: 1.08rem;
+      font-weight: 900;
+    }
+
+    .secret-wrap { margin-top: 22px; text-align: center; }
+    .secret-button {
+      border: 0;
+      padding: 10px 15px;
+      color: #b77b97;
+      background: transparent;
+      cursor: pointer;
+      font-size: .85rem;
+      font-weight: 800;
+      text-decoration: underline;
+      text-decoration-style: wavy;
+      text-underline-offset: 5px;
+    }
+    .secret-message {
+      display: none;
+      max-width: 490px;
+      margin: 13px auto 0;
+      padding: 17px 20px;
+      border: 1px dashed #f3a9c6;
+      border-radius: 20px;
+      color: #a6537c;
+      background: rgba(255,255,255,.7);
+      line-height: 1.7;
+      animation: rise .45s ease both;
+    }
+    .secret-message.show { display: block; }
+
+    footer {
+      padding: 25px 10px 0;
+      color: #c28aa4;
+      text-align: center;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+
+    .floaties {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .floaty {
+      position: absolute;
+      bottom: -50px;
+      opacity: 0;
+      animation: float-up linear forwards;
+      user-select: none;
+      filter: drop-shadow(0 3px 4px rgba(226, 107, 157, .12));
+    }
+    .pop-heart {
+      position: fixed;
+      z-index: 5;
+      pointer-events: none;
+      animation: pop 850ms ease-out forwards;
+      font-size: 22px;
+    }
+
+    @keyframes float-up {
+      0% { transform: translateY(0) rotate(0deg) scale(.7); opacity: 0; }
+      12% { opacity: .72; }
+      85% { opacity: .6; }
+      100% { transform: translateY(-115vh) rotate(35deg) scale(1.15); opacity: 0; }
+    }
+    @keyframes bob { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-8px) rotate(4deg); } }
+    @keyframes heartbeat { 0%,100% { transform: scale(1); } 14% { transform: scale(1.18); } 28% { transform: scale(1); } 42% { transform: scale(1.12); } }
+    @keyframes rise { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pop { 0% { opacity: 0; transform: translate(-50%,-50%) scale(.3); } 25% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%,-120px) scale(1.6) rotate(20deg); } }
+
+    @media (max-width: 520px) {
+      .page { width: min(100% - 20px, 760px); padding-top: 18px; }
+      .hero { border-radius: 27px; }
+      .surprise, .little-letter { border-radius: 25px; }
+      .secondary-button { margin: 5px 3px !important; }
+      .message { min-height: 115px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="floaties" id="floaties" aria-hidden="true"></div>
+
+  <main class="page">
+    <div class="topline"><span>✿</span> a tiny corner of the internet <span>✿</span></div>
+
+    <section class="hero" aria-labelledby="main-title">
+      <div class="bow" aria-hidden="true">🎀</div>
+      <h1 id="main-title">Hey, you two!</h1>
+      <p class="names">Gulaabiiii &amp; Kuchuu 💗</p>
+      <p class="intro">
+        Yes, you. I have absolutely no important announcement.
+        I just wanted to interrupt your day with something very, very sweet.
+      </p>
+      <button class="main-button" id="startButton">Open your tiny surprise 💌</button>
+      <p class="tiny-note">no occasion needed. you're loved, that's the occasion ♡</p>
+    </section>
+
+    <section class="surprise" id="surprise" aria-live="polite">
+      <span class="message-count" id="messageCount">little reminder #1</span>
+      <div class="message-heart" aria-hidden="true">💗</div>
+      <p class="message" id="message">You make ordinary days feel a little more lovely.</p>
+      <p class="message-sub" id="messageSub">And that is a pretty wonderful thing.</p>
+      <button class="secondary-button" id="anotherButton">Another little I love you ↻</button>
+      <button class="secondary-button" id="hugButton">Send a virtual hug 🧸</button>
+    </section>
+
+    <section class="little-letter">
+      <p class="section-kicker">a note from my heart</p>
+      <h2>Just because. 🌷</h2>
+      <p class="letter-copy">
+        My favourite people, you don't have to wait for birthdays, anniversaries,
+        special dates or perfectly planned moments to hear this.
+        I love you on the random Tuesdays, the sleepy evenings, the silly days,
+        the quiet moments and all the ordinary little spaces in between.
+        <br /><br />
+        If today feels a bit too loud, too tiring or simply not your day,
+        let this tiny page remind you that somewhere, someone is smiling
+        just because you exist.
+        <br /><br />
+        So here's your reminder: you are precious, you are appreciated,
+        and you are loved more than a little website could ever explain.
+      </p>
+      <p class="signature">Always sending you love, ♡</p>
+
+      <div class="secret-wrap">
+        <button class="secret-button" id="secretButton">pssst... there's a tiny secret here</button>
+        <div class="secret-message" id="secretMessage">
+          If I could choose one notification to pop up on your screen every day,
+          it would simply say: <strong>"Someone is ridiculously happy that you're in their life."</strong> 💞
+        </div>
+      </div>
+    </section>
+
+    <footer>made with a little code &amp; a whole lot of love ♡</footer>
+  </main>
+
+  <script>
+    const messages = [
+      ["I love you. In the simplest words, with the biggest meaning. 💗", "No special reason. No special occasion. Just you."],
+      ["You make my little corner of the world brighter. 🌷", "Please never underestimate the happiness you bring."],
+      ["If affection had a favourite address, it would be wherever you are. 🏡", "Consider this a tiny delivery of love."],
+      ["I hope you know how wonderfully, ridiculously precious you are. 🎀", "This is your gentle reminder to be kind to yourself, too."],
+      ["Even an ordinary day becomes a favourite when it has you in it. ☁️", "And yes, I would choose that ordinary day again."],
+      ["You are one of my favourite reasons to smile at my phone. 📱", "Not that I'm admitting how often that happens. Hehe."],
+      ["A thousand little hearts, and every single one says: I LOVE YOU. 💞", "Here, have another one. And another. And another."],
+      ["I hope life hugs you gently today. You deserve that and more. 🧸", "Until then, please accept this little virtual squeeze."],
+      ["If I had to send one message into the universe, it would be your name followed by 'I love you'. ✨", "Some things are worth saying again and again."],
+      ["You don't need to do anything extraordinary to be loved. Just being you is enough. 🌸", "Especially on the days you forget that."],
+      ["I am very, very fond of your existence. Like... ridiculously fond. 🥹", "That is the whole message. Please blush accordingly."],
+      ["No countdown, no calendar reminder. My heart just said it's time to love you loudly. 💌", "So here we are."]
+    ];
+
+    const startButton = document.getElementById('startButton');
+    const surprise = document.getElementById('surprise');
+    const message = document.getElementById('message');
+    const messageSub = document.getElementById('messageSub');
+    const messageCount = document.getElementById('messageCount');
+    const anotherButton = document.getElementById('anotherButton');
+    const hugButton = document.getElementById('hugButton');
+    const secretButton = document.getElementById('secretButton');
+    const secretMessage = document.getElementById('secretMessage');
+    const floaties = document.getElementById('floaties');
+
+    let count = 0;
+    let previousIndex = -1;
+
+    function showRandomMessage() {
+      let index;
+      do {
+        index = Math.floor(Math.random() * messages.length);
+      } while (messages.length > 1 && index === previousIndex);
+      previousIndex = index;
+      count++;
+      messageCount.textContent = `little reminder #${count}`;
+      message.textContent = messages[index][0];
+      messageSub.textContent = messages[index][1];
+      message.animate(
+        [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' }],
+        { duration: 420, easing: 'ease-out' }
+      );
+      burstHearts(window.innerWidth / 2, window.innerHeight * 0.56, 8);
+    }
+
+    startButton.addEventListener('click', () => {
+      if (!surprise.classList.contains('show')) {
+        surprise.classList.add('show');
+        showRandomMessage();
+        surprise.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        startButton.textContent = 'Aww, give me another 💗';
+      } else {
+        showRandomMessage();
+      }
+    });
+
+    anotherButton.addEventListener('click', showRandomMessage);
+
+    hugButton.addEventListener('click', () => {
+      message.textContent = 'SQUEEEEEZE! A very big, very warm virtual hug for you. 🧸💗';
+      messageSub.textContent = 'Hold it for as long as you need. No letting go just yet.';
+      burstHearts(window.innerWidth / 2, window.innerHeight * 0.55, 20);
+    });
+
+    secretButton.addEventListener('click', () => {
+      secretMessage.classList.toggle('show');
+      secretButton.textContent = secretMessage.classList.contains('show')
+        ? 'you found the secret! 💗'
+        : 'pssst... there’s a tiny secret here';
+      if (secretMessage.classList.contains('show')) burstHearts(window.innerWidth / 2, window.innerHeight * 0.82, 12);
+    });
+
+    function burstHearts(x, y, amount) {
+      const symbols = ['💗', '💕', '♡', '🌸', '✨', '💞'];
+      for (let i = 0; i < amount; i++) {
+        const heart = document.createElement('span');
+        heart.className = 'pop-heart';
+        heart.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        heart.style.left = `${x + (Math.random() - .5) * 150}px`;
+        heart.style.top = `${y + (Math.random() - .5) * 55}px`;
+        heart.style.animationDelay = `${Math.random() * 180}ms`;
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 1100);
+      }
+    }
+
+    function addFloatingDecoration() {
+      const item = document.createElement('span');
+      item.className = 'floaty';
+      const symbols = ['♡', '♥', '🌸', '✿', '✨', '🎀'];
+      item.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      item.style.left = `${Math.random() * 100}%`;
+      item.style.fontSize = `${14 + Math.random() * 18}px`;
+      item.style.animationDuration = `${9 + Math.random() * 9}s`;
+      item.style.animationDelay = `${Math.random() * 2}s`;
+      floaties.appendChild(item);
+      setTimeout(() => item.remove(), 19000);
+    }
+
+    for (let i = 0; i < 12; i++) {
+      setTimeout(addFloatingDecoration, i * 350);
+    }
+    setInterval(addFloatingDecoration, 850);
+  </script>
+</body>
+</html>
